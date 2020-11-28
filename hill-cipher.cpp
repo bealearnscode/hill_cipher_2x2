@@ -22,12 +22,33 @@ void encryption(char plaintext[], char *ciphertext, int key[2][2])
 {
     int stringlength = strlen(plaintext);
 
-    for (int i = 0; i < stringlength; i++)
+    // using ASCII codes to en/decrypt,
+    // so it's easier to put everything
+    // in a single lettercase
+    for (int index = 0; index < stringlength; index++)
     {
-        // using ASCII codes to en/decrypt,
-        // so it's easier to put everything
-        // in a single lettercase
-        plaintext[i] = tolower(plaintext[i] - 97);
+        plaintext[index] = tolower(plaintext[index] - 97);
     }
+
+    // the key looks like a 2 x 2 block.
+    // this means two columns and two rows.
+    // the rows of the first matrix are
+    // multiplied by the columns of the second
+    for (int index = 0; index < stringlength; index++)
+    {
+        ciphertext[index] = (((plaintext[index] * key[0][0]) + (plaintext[index + 1] * key[1][0])) % 26);
+        ciphertext[index + 1] = (((plaintext[index] * key[0][1]) + (plaintext[index + 1] * key[1][1])) % 26);
+        index++;
+    }
+
+    for (int index = 0; index < stringlength; index++)
+    {
+        ciphertext[index] = ciphertext[index] + 97;
+    }
+}
+
+void decryption(char ciphertext[], char *plaintext, int key[2][2])
+{
+    
 }
 
