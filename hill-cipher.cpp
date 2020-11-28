@@ -98,12 +98,64 @@ int inversemodulo(int c, int d)
             g = floor(c0 / d0);
             h = c0 - g * d0;
         }
-        return l;
     }
+    return l;
 }
 
 
-void inverse(int f[2][2], int(&d)[2][2])
+// void inverse(int f[2][2], int(&d)[2][2])
+// {
+//     int dK = ((f[0][0] * f[1][1]) - (f[0][1] * f[1][0]));
+// }
+
+int main()
 {
-    int dK = ((f[0][0] * f[1][1]) - (f[0][1] * f[1][0]));
+    int key[2][2];
+    int inversearray[2][2];
+    int determinantkey;
+    int inversedeterminant;
+
+    char plaintext[99];
+    char ciphertext[99];
+
+    bool isInvertible = false;
+    bool gcd1 = false;
+
+    // ask user to create a 2x2 matrix
+    cout << "Create a 2x2 key by typing four numbers separated by a space." << endl;
+    for (int index = 0; index < 2; index++)
+    {
+        for (int j = 0; j < 2; j++)
+        {
+            cin >> key[index][j];
+        }
+        cout << endl;
+    }
+
+    // print the matrix created by the user
+    cout << "Your matrix key is: " << endl;
+    for (int index = 0; index < 2; index++)
+    {
+        for (int j = 0; j < 2; j++)
+        {
+            cout << key[index][j] << "\t";
+        }
+        cout << endl << endl;
+    }
+
+    // check if matrix is invertible
+    determinantkey = ((key[0][0] * key[1][1]) - (key[0][1] * key[1][0]));
+    if (determinantkey != 0)
+    {
+        isInvertible = true;
+    }
+    cout << "The matrix is invertible and the determinant is " << determinantkey << "." << endl;
+
+    // check if gcd = 1
+    if(__gcd(determinantkey, 26) == 1)
+    {
+        gcd1 = true;
+    }
+
+    return 0;
 }
