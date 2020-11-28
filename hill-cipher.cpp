@@ -18,5 +18,16 @@ void decryption(char ciphertext[], char *plaintext[], int key[2][2]);
 void inverse(int y[2][2], int (&z)[2][2]);
 int inversemodulo(int x, int z);
 
+void encryption(char plaintext[], char *ciphertext, int key[2][2])
+{
+    int stringlength = strlen(plaintext);
 
+    for (int i = 0; i < stringlength; i++)
+    {
+        // using ASCII codes to en/decrypt,
+        // so it's easier to put everything
+        // in a single lettercase
+        plaintext[i] = tolower(plaintext[i] - 97);
+    }
+}
 
