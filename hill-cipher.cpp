@@ -15,8 +15,8 @@ using namespace std;
 void encryption(char plaintext[], char *ciphertext[], int key[2][2]);
 void decryption(char ciphertext[], char *plaintext[], int key[2][2]);
 
-int inversemodulo(int x, int z);
-void inverse(int y[2][2], int (&z)[2][2]);
+int inversemodulo(int c, int d);
+void inverse(int f[2][2], int (&d)[2][2]);
 
 
 void encryption(char plaintext[], char *ciphertext, int key[2][2])
@@ -70,16 +70,40 @@ void decryption(char ciphertext[], char *plaintext, int key[2][2])
     }
 }
 
-int inversemodulo(int x, int z)
+int inversemodulo(int c, int d)
 {
-    int x0, z0, p, q, temp;
+    int c0, d0, g, h, temp;
 
-    int h0 = 0;
-    x0 = x;
-    z0 = z;
+    int l0 = 0;
+    int l = 1;
+    c0 = c;
+    d0 = d;
+    g = floor(c0 / d0);
+    h = c0 - g * d0;
+
+    while (h > 0)
+    {
+        temp = l0 - g * l;
+        if (temp >= 0)
+        {
+            temp = temp % c;
+        }
+        else
+        {
+            temp = c - ((-temp) % c);
+            l0 = l;
+            l = temp;
+            c0 = d0;
+            d0 = h;
+            g = floor(c0 / d0);
+            h = c0 - g * d0;
+        }
+        return l;
+    }
 }
 
-void inverse(int y[2][2], int(&z)[2][2])
+
+void inverse(int f[2][2], int(&d)[2][2])
 {
-    int dK = ((y[0][0] * y[1][1]) - (y[0][1] * y[1][0]));
+    int dK = ((f[0][0] * f[1][1]) - (f[0][1] * f[1][0]));
 }
